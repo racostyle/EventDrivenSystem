@@ -21,18 +21,18 @@ namespace Logic.Events
             }
         }
        
-        public void RegisterListener<T>(EventBusDelegate<T> eventDelegate) where T : struct, IEvent
+        public void Subscribe<T>(EventBusDelegate<T> eventDelegate) where T : struct, IEvent
         {
-            _eventBus.RegisterListener<T>(eventDelegate);
+            _eventBus.Subscribe<T>(eventDelegate);
         }
-        public void DeregisterListener<T>(EventBusDelegate<T> eventDelegate) where T : struct, IEvent
+        public void Unsubscribe<T>(EventBusDelegate<T> eventDelegate) where T : struct, IEvent
         {
-            _eventBus.DeregisterListener<T>(eventDelegate);
+            _eventBus.Unsubscribe<T>(eventDelegate);
         }
 
-        public void StartEvent<T>(in T eventData) where T : struct, IEvent
+        public void Invoke<T>(in T eventData) where T : struct, IEvent
         {
-            _eventBus.StartEvent<T>(eventData);
+            _eventBus.Invoke<T>(eventData);
         }
     }
 }

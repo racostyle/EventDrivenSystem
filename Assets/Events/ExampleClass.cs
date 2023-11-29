@@ -8,7 +8,7 @@ namespace Logic.Events
         #region [EVENTS]
         void RegisterEvent()
         {
-            EventManager.Instance.RegisterListener<EventDefinitions.StartTestEvent>(OnStartTestEvent);
+            EventManager.Instance.Subscribe<EventDefinitions.StartTestEvent>(OnStartTestEvent);
         }
 
         private void OnStartTestEvent(EventDefinitions.StartTestEvent args)
@@ -19,7 +19,7 @@ namespace Logic.Events
 
         void RunEvent()
         {
-            EventManager.Instance.StartEvent(new EventDefinitions.StartTestEvent
+            EventManager.Instance.Invoke(new EventDefinitions.StartTestEvent
             {
                 Text = "text", 
                 Position = UnityEngine.Vector3.up
@@ -28,7 +28,7 @@ namespace Logic.Events
 
         void DeregisterEvent()
         {
-            EventManager.Instance.DeregisterListener<EventDefinitions.StartTestEvent>(OnStartTestEvent);
+            EventManager.Instance.Unsubscribe<EventDefinitions.StartTestEvent>(OnStartTestEvent);
         }
         #endregion [EVENTS]
 

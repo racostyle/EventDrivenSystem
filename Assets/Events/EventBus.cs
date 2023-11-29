@@ -14,7 +14,7 @@ namespace Logic.Events
         }
 
         #region [REGISTER METHODS]
-        public void RegisterListener<T>(EventBusDelegate<T> eventDelegate) where T : struct, IEvent
+        public void Subscribe<T>(EventBusDelegate<T> eventDelegate) where T : struct, IEvent
         {
             var t = typeof(T);
             if (eventRegistry.TryGetValue(t, out Delegate d))
@@ -27,7 +27,7 @@ namespace Logic.Events
             }
         }
 
-        public void DeregisterListener<T>(EventBusDelegate<T> eventDelegate) where T : struct, IEvent
+        public void Unsubscribe<T>(EventBusDelegate<T> eventDelegate) where T : struct, IEvent
         {
             var t = typeof(T);
             if (eventRegistry.TryGetValue(t, out Delegate d))
@@ -47,7 +47,7 @@ namespace Logic.Events
         #endregion
 
         #region [START METHOD]
-        public void StartEvent<T>(in T eventData) where T : struct, IEvent
+        public void Invoke<T>(in T eventData) where T : struct, IEvent
         {
             if (eventRegistry.TryGetValue(typeof(T), out Delegate d))
             {
